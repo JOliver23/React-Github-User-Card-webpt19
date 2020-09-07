@@ -29,3 +29,19 @@ code {
   max-width: 90%;
  max-height: 90%; 
 }
+
+.name-tag{
+  display: flex;
+  flex-flow: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+  background: papayawhip;
+  border-radius: 50%;
+}
+.gen-info {
+  background: rgb(255, 241, 193);
+  border: .3rem solid red;
+  border-radius: 10%;
+  padding: 1rem;
+}
