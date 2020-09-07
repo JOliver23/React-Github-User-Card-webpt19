@@ -1,5 +1,6 @@
 import React from 'react';
 import UserCard from './components/UserCard';
+import './index.css';
 
 class App extends React.Component {
   state = {

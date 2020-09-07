@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.user-card {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 25vw;
+  background: grey;
+  border: .3rem double black;
+  border-radius: 10%;
+  padding: 2rem;
+}
+
+.user-card > img {
+  border-radius: 10%;
+  max-width: 90%;
+ max-height: 90%; 
+}
