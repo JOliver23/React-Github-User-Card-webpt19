@@ -8,6 +8,30 @@ class App extends React.Component {
     error: "",
     userName: "JOliver23"
   }
+  componentDidMount() {
+    console.log("jo: App.js: App: CDM: CDM run")
+  fetch("https://api.github.com/users/JOliver23")
+    .then(response => response.json())
+    .then(user => {
+      console.log("jo: App.js: App: CDM: response github api", user);
+      if (user.type !== "User") {
+        this.setState({error: "Error in CDM fetch of given userName"})
+      } else {
+        this.setState({user: user})
+      }
+    })
+    .catch(err => {
+      console.error("jo: App.js: App: CDM: fetch failed")
+    });
+    fetch("https://api.github.com/users/JOliver23/followers")
+      .then(response => response.json())
+      .then(followers => {
+        console.log("jo: App.js: App: CDM: CDM followers call ", followers)
+      })
+      .catch(err => {
+        console.error("jo: App.js: App: CDM: follower fetch failed")
+      });
+};
   render() {
     console.log("jo: App.js: App: render run");
     return(
