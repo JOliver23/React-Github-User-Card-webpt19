@@ -32,6 +32,45 @@ class App extends React.Component {
         console.error("jo: App.js: App: CDM: follower fetch failed")
       });
 };
+componentDidUpdate(prevProps, PrevState) {
+  console.log("jo: App.js: App: CDU: Cdu render")
+};
+
+handleChange = e => {
+  this.setState({
+    userName: e.target.value
+  });
+};
+
+handleUserNameChange = e => {
+  fetch(`https://api.github.com/users/${this.state.userName}`)
+    .then(response => {
+      console.log("jo: App.js: App: handleUserNameChange", response);
+      return response.json();
+    })
+    .then(user => {
+      if (user.login === "error") {
+        this.setState({error: "broken"});
+      } else {
+        this.setState({user: user})
+      }
+    })
+    .catch(err => {
+      console.log("jo: App.js: App: handleUserNameChange: fetch failed: ", err);
+      this.setState({error: err});
+    });
+
+    fetch(`https://api.github.com/users/${this.state.userName}/followers`)
+    .then(response => response.json())
+    .then(followers => {
+      console.log("jo: App.js: App: CDM: CDM followers call ", followers)
+      this.setState({followers: followers});
+    })
+    .catch(err => {
+      console.error("jo: App.js: App: CDM: follower fetch failed")
+    });
+};
+
   render() {
     console.log("jo: App.js: App: render run");
     return(
@@ -40,9 +79,14 @@ class App extends React.Component {
         <input 
           type="text"
           placeholder="Enter your GitHub login name"
+          value={this.state.userName}
+          onChange={this.handleChange}
         />
-        <button>Find Card</button>
-        <UserCard/>
+        <button onClick={this.handleUserNameChange}>Find Card</button>
+        <UserCard 
+          user={this.state.user}
+          followers={this.state.followers}
+          />
       </div>
     )
   }
